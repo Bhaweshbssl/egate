@@ -19,7 +19,8 @@ class IndexController extends Controller
         $products=Products_model::where('p_type', 'standard')->get();
         $featured=Products_model::orderBy('created_at','asc')->where('p_type', 'featured')->get();
         $series=Category_model::where('parent_id', '39')->limit(4)->get();
-        return view('frontEnd.index',compact('products','featured','series'));
+        $productsattr=ProductAtrr_model::get();
+        return view('frontEnd.index',compact('products','featured','series','productsattr'));
     }
     public function shop(){
         $products=Products_model::orderBy('created_at','asc')->paginate(8);

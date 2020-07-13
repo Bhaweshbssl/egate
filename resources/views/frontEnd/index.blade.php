@@ -112,8 +112,18 @@
                   <p style="word-break: break-word;"> {{ str_limit(strip_tags(html_entity_decode($product->description)), $limit = 100, $end = '..') }}
                   <div class="rating">
                   </div>
-                  <p class="price">
-                    <span class="price-new">₹{{$product->price}}</span> <span class="price-old">₹{{$product->price}}</span>
+                  <p class="price">  
+                    <span class="price-new">
+                      <?php $count = 0; ?> 
+                      @foreach($productsattr as $attr)
+                          @if($product->id == $attr->products_id)
+                              <?php if($count == 1) break; ?>
+                                  ₹ {{$attr->price}}
+                              <?php $count++; ?>    
+                          @endif    
+                      @endforeach
+                    </span> 
+                    <span class="price-old">₹{{$product->price}}</span>
                   </p>
                 </div>
                 <div class="button-group">
